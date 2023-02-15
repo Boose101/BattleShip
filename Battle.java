@@ -1,5 +1,3 @@
-import Wordle.main;
-
 import java.util.Scanner;
 public class Battle {
   
@@ -22,6 +20,20 @@ public class Battle {
         initialize(shipBoard);
         System.out.println(getShipBoard(shipBoard));
 
+        //Inital
+
+        getInfo(scan, "Place your Carrier(5).");
+
+
+
+        System.out.println("Place your Battleship(4).");
+
+        System.out.println("Place your Destroyer(3).");
+
+        System.out.println("Place your Submarine(3).");
+
+        System.out.println("Place your Patrol Boat(2).");
+
 
     }
 
@@ -33,7 +45,6 @@ public class Battle {
         }
         buff += '\n';
         char c = 'A';
-        
         for(String [] row : shipBoard) {
             buff += c + " ";
             for(String item : row){
@@ -42,9 +53,43 @@ public class Battle {
             buff += "\n";
             c++;
         }
-
-
         return buff;
+    }
+
+    public static void getInfo(Scanner scan, String message){
+        boolean parameters = true;
+
+        while(parameters){
+            System.out.println(message);
+            String uInput  = scan.nextLine();
+            String[] uInputArr = uInput.split("");
+            int uRow = (uInputArr[0].toLowerCase().charAt(0) - 'a');
+            int uCol = Integer.parseInt(uInputArr[1]) - 1;
+            if(uRow <= 10 && uCol <= 10){
+                parameters = false;
+            }
+        }
+        
+
+        
+        parameters = true;
+        while(parameters){
+            System.out.println("Horizontaly(0) or Vertically(1)?");
+
+            int dirBuff = Integer.parseInt(scan.nextLine());
+            Boolean direction = null; // True = Horizontal, false = Vertical
+            if(dirBuff == 0){
+                direction = true;
+                parameters = false;
+            }else if(dirBuff == 1){
+                direction = false;
+                parameters = false;
+            }
+        }
+        
+
+
+
     }
     
 }
